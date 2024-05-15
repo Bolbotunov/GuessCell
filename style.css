@@ -1,0 +1,72 @@
+.wrapper_field{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  max-width:100%;
+  height:500px;
+}
+.field{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgb(121, 133, 118);
+  width:90%;
+  height:90%;
+  background-color:rgb(233, 245, 230);
+}
+.cells{
+  display:flex;
+  justify-content: center;
+/*  border:1px solid rgb(121, 133, 118); */
+  width:90%;
+  min-width:255px;
+  height:50px;
+  flex-wrap:wrap;
+   gap:5px;
+}
+.cell{
+   transition:.3s ease;
+  border:1px solid rgb(121, 133, 118);
+  width:50px;
+  min-height:50px;
+  text-align:center;
+background:black;
+  color:white;
+  font-size:30px;
+}
+
+.btns_wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  top:10%;
+  border:1px solid rgb(121, 133, 118);
+  height:50px;
+  width:100px;
+  transition:.4s ease;
+  font-size:17px;
+}
+.btns{
+  position: relative;
+}
+
+.btns_wrapper:hover{
+   background:green;
+  color:white;
+}
+
+.change_color{
+  transition:.3s ease;
+     background:white;
+  color:white;
+}
+.win_cell{
+   background:green;
+  color:white;
+}
+.lose_cell{
+   background:red;
+  color:white;
+}
