@@ -100,7 +100,6 @@ function press(){
   timeWinAttempts = winAttemps()
   infoAttempts.textContent = `Осталось попыток: ${attempts}`
   cells.forEach((item)=>{
-    item.style.pointerEvents='auto'
     item.classList.toggle('change_color')
     item.classList.remove('win_cell')
     item.classList.remove('lose_cell')
