@@ -1,9 +1,15 @@
+.stat{
+  padding-bottom:20px;
+}
 .wrapper_field{
   display:flex;
   align-items:center;
   justify-content:center;
   max-width:100%;
   height:500px;
+  position:sticky;
+  z-index:2;
+
 }
 .field{
   display:flex;
@@ -14,6 +20,15 @@
   width:90%;
   height:90%;
   background-color:rgb(233, 245, 230);
+}
+.finish{
+  position:absolute;
+  width:100%;
+  height:100%;
+   background-color:rgba(0,0,0, 0.5);
+  opacity:0.2;
+   transition:.3s ease;
+  z-index:1;
 }
 .cells{
   display:flex;
