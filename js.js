@@ -92,6 +92,7 @@ function newGame(){
 
 // нажатие на "новая игра" и "сброс"
 function press(){
+   openBtn()
   let attempts = 3
   a = randomize(1,5)
   console.log(a)
