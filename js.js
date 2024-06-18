@@ -4,18 +4,26 @@ let btnText = document.querySelector('.btns')
 let infoAttempts = document.querySelector('.info_attempts')
 let attempts
 
+
 // блокировка всех кнопок
 function blockBtn(){
   cells.forEach((item)=>{
     item.style.pointerEvents='none'
+    item.classList.add('change_color')
+    item.classList.remove('win_cell')
+    item.classList.remove('lose_cell')
   })
 }
 // разблокировка всех кнопок
 function openBtn(){
   cells.forEach((item)=>{
     item.style.pointerEvents='auto'
+    item.classList.remove('change_color')
+    item.classList.remove('win_cell')
+    item.classList.remove('lose_cell')
   })
 }
+
 
 // рандомная ячейка победитель
 function randomize(min,max){
@@ -51,14 +59,19 @@ cells.forEach((item)=>{
     let selectCell = +item.innerHTML
     if(a === selectCell){
         item.classList.add('win_cell')
-  win()
+        infoAttempts.textContent = `Ячейка угадана с ${attempts} попытки. Сыграем еще?`
+        cells.forEach((item)=>{
+          item.style.pointerEvents='none'
+     btnText.textContent = 'new game'
+   })
   }else{
   item.classList.add('lose_cell')
-  item.style.pointerEvents='none'
     if(attempts === 3){
       infoAttempts.textContent = `Попытки закончились!Начните заново!`
-      blockBtn()
-    newGame()
+       cells.forEach((item)=>{
+    item.style.pointerEvents='none'
+  })
+       btnText.textContent = 'new game'
   }else{
     infoAttempts.textContent = `Осталось попыток: ${3-attempts}`
   }
@@ -70,38 +83,30 @@ cells.forEach((item)=>{
 function win(){
    infoAttempts.textContent = `Ячейка угадана с ${attempts} попытки. Сыграем еще?`
       cells.forEach((item)=>{
-     item.style.pointerEvents='none'
+     blockBtn()
      item.classList.toggle('change_color')
      btnText.textContent = 'new game'
    })
    
 }
 
-function newGame(){
-  btnText.textContent = btnText.textContent === 'new game' ? 'select cell' : 'new game';
-  btn.addEventListener('click',function(){
-    cells.forEach((item)=>{
-    item.style.pointerEvents='auto'
-    item.classList.add('change_color')
-    item.classList.remove('win_cell')
-    item.classList.remove('lose_cell')
-  })
-  })
-}
-
-
 // нажатие на "новая игра" и "сброс"
 function press(){
-   openBtn()
-  let attempts = 3
+    let attempts = 3
   a = randomize(1,5)
   console.log(a)
-  btnText.textContent = btnText.textContent === 'new game' ? 'select cell' : 'new game';
+  if(btnText.textContent === 'new game'){
+    btnText.textContent = 'select cell'
+    openBtn()
+  }else{
+    btnText.textContent = 'new game'
+    blockBtn()
+      }
   remainAttempts = counterAttemps()
   timeWinAttempts = winAttemps()
   infoAttempts.textContent = `Осталось попыток: ${attempts}`
   cells.forEach((item)=>{
-    item.classList.toggle('change_color')
+     item.classList.toggle('change_color')
     item.classList.remove('win_cell')
     item.classList.remove('lose_cell')
   })
