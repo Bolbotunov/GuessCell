@@ -1,6 +1,29 @@
 .stat{
   padding-bottom:20px;
 }
+
+.statistics{
+  display:flex;
+  gap:50px;
+  padding-bottom:20px;
+}
+
+.count_loses, .count_wins{
+  display:block;
+  width:20px;
+  height:20px;
+}
+.loses_wrapper{
+  color:red;
+  
+}
+.wins_wrapper{
+  color:green;
+}
+
+.loses_wrapper, .wins_wrapper{
+  font-size:22px;
+}
 .wrapper_field{
   display:flex;
   align-items:center;

@@ -2,8 +2,27 @@ let cells = [...document.querySelectorAll('.cell')]
 let btn = document.querySelector('.btns_wrapper')
 let btnText = document.querySelector('.btns')
 let infoAttempts = document.querySelector('.info_attempts')
+let countWins = document.querySelector('.count_wins')
+let countLoses = document.querySelector('.count_loses')
 let attempts
+let wins = 0
+let loses = 0
 
+
+// рандомная ячейка победитель
+function randomize(min,max){
+  let randomCell =Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomCell
+}
+
+// количество оставшихся попыток
+function counterAttemps(){
+  attempts = 3
+  return function(){
+    return attempts -= 1
+  }
+}
+let remainAttempts = counterAttemps()
 
 // блокировка всех кнопок
 function blockBtn(){
@@ -25,22 +44,6 @@ function openBtn(){
 }
 
 
-// рандомная ячейка победитель
-function randomize(min,max){
-  let randomCell =Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomCell
-}
-
-// количество оставшихся попыток
-function counterAttemps(){
-  attempts = 3
-  return function(){
-    return attempts -= 1
-  }
-}
-let remainAttempts = counterAttemps()
-
-
 // количество попыток за которые угадана ячейка
 function winAttemps(){
    attempts = 0
@@ -49,6 +52,11 @@ function winAttemps(){
   }
 }
 let timeWinAttempts = winAttemps()
+
+
+countLoses.textContent = loses
+countWins.textContent = wins
+
 
 
 //  условия при победе ячейки и надписи к этим условиям
@@ -60,16 +68,23 @@ cells.forEach((item)=>{
     if(a === selectCell){
         item.classList.add('win_cell')
         infoAttempts.textContent = `Ячейка угадана с ${attempts} попытки. Сыграем еще?`
+        wins+=1
+        countWins.textContent = wins
         cells.forEach((item)=>{
           item.style.pointerEvents='none'
      btnText.textContent = 'new game'
    })
   }else{
-  item.classList.add('lose_cell')
-    if(attempts === 3){
+      item.classList.add('lose_cell')
+  item.style.pointerEvents='none'
+      if(attempts === 3){
+      loses+=1
+      countLoses.textContent = loses
       infoAttempts.textContent = `Попытки закончились!Начните заново!`
+      
        cells.forEach((item)=>{
     item.style.pointerEvents='none'
+    
   })
        btnText.textContent = 'new game'
   }else{
@@ -78,17 +93,6 @@ cells.forEach((item)=>{
 }
   })
 })
-
-
-function win(){
-   infoAttempts.textContent = `Ячейка угадана с ${attempts} попытки. Сыграем еще?`
-      cells.forEach((item)=>{
-     blockBtn()
-     item.classList.toggle('change_color')
-     btnText.textContent = 'new game'
-   })
-   
-}
 
 // нажатие на "новая игра" и "сброс"
 function press(){
@@ -112,3 +116,10 @@ function press(){
   })
 }
 btn.addEventListener('click',press)
+
+// console.log(wins,loses)
+
+// statWins.textContent = localStorage.getItem('wins')
+// statLoses.textContent = localStorage.getItem('loses')
+
+// localStorage.clear();
